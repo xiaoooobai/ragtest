@@ -1,4 +1,4 @@
-from typing import Optional, Union
+from typing import Optional, Union, Iterable
 from decorator import contextmanager
 from core.db.base import DbConnector
 from core.config.config import Config
@@ -54,7 +54,7 @@ class MySqlConnector(DbConnector):
 
     def execute_sql(self,
                     sql: str,
-                    params: Optional[Union[dict, list]] = None,
+                    params: Optional[Union[dict, Iterable]] = None,
                     fetch: bool = False,
                     fetch_all: bool = False):
         """
@@ -66,7 +66,7 @@ class MySqlConnector(DbConnector):
         :return:
         """
         with self.connection.cursor(self._cursor_type) as cursor:
-            cursor.execute(sql, params or ())
+            cursor.execute(sql, params)
             if fetch:
                 if fetch_all:
                     return cursor.fetchall()

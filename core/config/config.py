@@ -1,8 +1,8 @@
 import os
 from typing import Any, Dict
-
 from core.base.clz import singleton
 from dotenv import load_dotenv
+import logging
 
 
 @singleton
@@ -15,6 +15,8 @@ class Config:
             'MYSQL_DB_USER': os.environ.get('MYSQL_DB_USER', 'root'),
             'MYSQL_DB_PASSWORD': os.environ.get('MYSQL_DB_PASSWORD', 'not set'),
         }
+
+        self.default_logger = self.get_logger()
 
         self._config = {
             k.lower(): v
@@ -32,3 +34,6 @@ class Config:
             return self._config.get(key.lower())
         else:
             return self._config.get(key)
+
+    def get_logger(self, key: str = 'ragtest') -> logging.Logger:
+        return logging.getLogger(key)

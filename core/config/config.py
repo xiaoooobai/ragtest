@@ -14,6 +14,7 @@ class Config:
             'MYSQL_DB_PORT': os.environ.get('MYSQL_DB_PORT', '3306'),
             'MYSQL_DB_USER': os.environ.get('MYSQL_DB_USER', 'root'),
             'MYSQL_DB_PASSWORD': os.environ.get('MYSQL_DB_PASSWORD', 'not set'),
+            'MYSQL_DB_DATABASE': os.environ.get('MYSQL_DB_DATABASE', 'test'),
         }
 
         self.default_logger = self.get_logger()
